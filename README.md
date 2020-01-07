@@ -12,7 +12,7 @@ This project contains two files:
   3. Move axis 1 up and down
 
 To test the example,
-1. Make sure Tcp_cmd_server is running on the robot.
+1. Make sure the Tcp_cmd_server GPL project is running on the robot.
 2. Make sure the example script is executable: `chmod +x example_script.py`
 3. Run the example script with the robot's IP as the host and 10100 as the port number. For example,
 `./example_script.py 192.168.0.1 10100`
