@@ -41,13 +41,11 @@ try:
 	client.SendCommand("waitforeom")
 	client.SendCommand("attach 0")
 
-
-
 except Exception as e:
 	print(str(e))
 
 finally:
 	try:
 		client.Close()
-	except:
-		pass
+	except Exception as e:
+		print(f"Attempt to close client failed: {e}")
