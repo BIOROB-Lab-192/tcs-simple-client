@@ -4,34 +4,40 @@ import sys
 import time
 import pa_pyclient
 
+print("Beginning example routine")
 try:
 	if len(sys.argv) != 3:
-		raise Exception("Connection requires both host and port arguments")
+		host = "192.168.0.1"
+		port = 10100
+	else:
+		host = sys.argv[1]
+		port = sys.argv[2]
 
-	host = sys.argv[1]
-	port = sys.argv[2]
 	client = pa_pyclient.PyClient(host, port)
 
 	print("Beginning example routine")
-
+	client.SendCommand("mode 0")
 	# Enable high power if necessary
 	is_hp = client.SendCommand("hp")
 	if is_hp == "0 0":
 		client.SendCommand("hp 1")
 		time.sleep(5)
-
+	
 	# Attach the robot to this thread
 	client.SendCommand("attach 1")
 
 	# Home if necessary
 	is_homed = client.SendCommand("pd 2800")
 	if is_homed == "0 0":
+		print("is homed")
 		client.SendCommand("home")
-
+		
+	# get verbose mode 1 to hopefully get more on errors
+	client.SendCommand("mode 1")
+	client.mode = 1
 	# Begin example routine
-	client.SendCommand("moveoneaxis 1 300 1")
-	client.SendCommand("moveoneaxis 1 100 1")
-	client.SendCommand("moveoneaxis 1 300 1")
+	client.SendCommand("MoveC 1 -212 100 600 15 175.569 72.883 38")
+	client.SendCommand("MoveC 1 162 200 400 15 175.569 72.883 38")
 	client.SendCommand("waitforeom")
 	client.SendCommand("attach 0")
 
