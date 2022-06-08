@@ -7,8 +7,8 @@ import pa_pyclient
 print("Beginning example routine")
 try:
 	if len(sys.argv) != 3:
-		host = "192.168.0.1"
-		port = 10100
+		host = "10.251.163.61"
+		port = 23
 	else:
 		host = sys.argv[1]
 		port = sys.argv[2]
