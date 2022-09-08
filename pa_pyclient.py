@@ -43,6 +43,19 @@ class PyClient:
 		print("<< "+ response2)
 		return response2
 
+	def PingRobot(self):
+		'''Check if connected to robot'''
+		try:
+			self.connection.write(("nop".encode("ascii") + b"\n"))
+		except Exception as e:
+			print(f'Unable to connect to robot: {e}')
+			return False
+		response = self.connection.read_until(b"\n",timeout=0.1).rstrip().decode("ascii")
+		if response == '':
+			print(f'Unable to connect to robot: No Response')
+			return False
+		else:
+			return True
 
 	def Close(self):
 		self.connection.close()
